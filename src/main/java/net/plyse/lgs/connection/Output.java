@@ -3,14 +3,26 @@
  */
 package net.plyse.lgs.connection;
 
+import net.plyse.lgs.gate.LogicGateObserver;
+
 /**
  * @author Raphael Dichler on 25.01.2022.
  */
 public class Output extends Link implements Modifier {
 
+    public Output(LogicGateObserver logicGate) {
+        super(logicGate);
+    }
+
+    public Output(LogicGateObserver logicGate, boolean status) {
+        super(logicGate, status);
+    }
+
     @Override
     public void modifier() {
-        this.connection.modify(isStatusHigh());
+        if (connection != null) {
+            this.connection.modify(isStatusHigh());
+        }
     }
 
     @Override

@@ -3,14 +3,15 @@
  */
 package net.plyse.lgs.connection;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * @author Raphael Dichler on 25.01.2022.
  */
-public abstract class Connection implements Modifiable, Readable {
+public class Connection implements Modifiable, Readable {
 
-    private List<LinkObserver> inputs;
+    private final List<LinkObserver> inputs;
     private boolean status;
 
     public Connection() {
@@ -19,6 +20,7 @@ public abstract class Connection implements Modifiable, Readable {
 
     public Connection(boolean status) {
         this.status = status;
+        this.inputs = new ArrayList<>();
     }
 
     @Override

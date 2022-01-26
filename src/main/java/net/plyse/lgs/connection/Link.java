@@ -3,16 +3,26 @@
  */
 package net.plyse.lgs.connection;
 
-import net.plyse.lgs.gate.LogicGate;
+import net.plyse.lgs.gate.LogicGateObserver;
 
 /**
  * @author Raphael Dichler on 25.01.2022.
  */
-public abstract class Link implements Readable, Invertible, LinkObserver {
+public abstract class Link implements Readable, Invertible, LinkObserver, Connectable {
 
-    protected Connection connection;
-    protected boolean status = false;
+    protected final LogicGateObserver logicGate;
+    protected Connection connection = null;
+    protected boolean status;
     private boolean invertStatus = false;
+
+    public Link(LogicGateObserver logicGate) {
+        this(logicGate, false);
+    }
+
+    public Link(LogicGateObserver logicGate, boolean status) {
+        this.logicGate = logicGate;
+        this.status = status;
+    }
 
     @Override
     public boolean isStatusHigh() {
@@ -27,6 +37,12 @@ public abstract class Link implements Readable, Invertible, LinkObserver {
     @Override
     public void reverse() {
         invertStatus = false;
+    }
+
+    @Override
+    public void connect(Connection connection) {
+        if (connection == null) throw new IllegalArgumentException("The connection cannot be null.");
+        this.connection = connection;
     }
 
 }

@@ -8,6 +8,12 @@ package net.plyse.lgs.gate;
  */
 public class Xor extends LogicGate{
 
+    private static final int MIN_INPUTS = 2;
+
+    public Xor(int inputs, boolean status) {
+        super(Math.max(MIN_INPUTS, inputs), status);
+    }
+
     @Override
     public void update(boolean updateValue) {
         updateValue = this.inputs[0].isStatusHigh();

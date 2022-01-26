@@ -10,7 +10,13 @@ import net.plyse.lgs.gate.LogicGateObserver;
  */
 public class Input extends Link {
 
-    private LogicGateObserver logicGate;
+    public Input(LogicGateObserver logicGate) {
+        super(logicGate);
+    }
+
+    public Input(LogicGateObserver logicGate, boolean status) {
+        super(logicGate, status);
+    }
 
     @Override
     public void update() {

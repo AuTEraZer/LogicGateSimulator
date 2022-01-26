@@ -6,7 +6,12 @@ package net.plyse.lgs.gate;
 /**
  * @author Raphael Dichler on 25.01.2022.
  */
+@SuppressWarnings("ALL")
 public class Or extends LogicGate{
+
+    public Or(int inputs, boolean status) {
+        super(inputs, status);
+    }
 
     @Override
     public void update(boolean updateValue) {
