@@ -1,3 +1,6 @@
+/*
+ * Copyright (c) 2022 Raphael Dichler.
+ */
 package net.plyse.lgs.connection;
 
 /**
@@ -6,6 +9,6 @@ package net.plyse.lgs.connection;
  */
 public interface Modifier {
 
-    void modifier(Modifiable modifiable);
+    void modifier();
 
 }
