@@ -12,13 +12,15 @@ public class And extends LogicGate  {
     public void update(boolean updateValue) {
         if (!updateValue) {
             this.status = false;
-            return;     // update status of output
+            output.update();
+            return;
         }
 
         for (int i = 0; i < this.inputs.length; i++) {
             if (!inputs[i].isStatusHigh()) {
                 this.status = false;
-                return; //todo update status of output
+                output.update();
+                return;
             }
         }
 

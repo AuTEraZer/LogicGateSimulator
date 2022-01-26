@@ -13,4 +13,9 @@ public class Output extends Link implements Modifier {
         this.connection.modify(isStatusHigh());
     }
 
+    @Override
+    public void update() {
+        modifier();
+    }
+
 }

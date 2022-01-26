@@ -10,6 +10,8 @@ public class Not extends LogicGate {
 
     @Override
     public void update(boolean updateValue) {
-
+        this.status = updateValue;
+        this.output.update();
     }
+
 }

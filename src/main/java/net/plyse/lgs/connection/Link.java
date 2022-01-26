@@ -8,9 +8,8 @@ import net.plyse.lgs.gate.LogicGate;
 /**
  * @author Raphael Dichler on 25.01.2022.
  */
-public abstract class Link implements Readable, Invertible {
+public abstract class Link implements Readable, Invertible, LinkObserver {
 
-    protected LogicGate logicGate;
     protected Connection connection;
     protected boolean status = false;
     private boolean invertStatus = false;
