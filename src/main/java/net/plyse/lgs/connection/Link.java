@@ -3,17 +3,21 @@
  */
 package net.plyse.lgs.connection;
 
+import net.plyse.lgs.gate.LogicGate;
+
 /**
  * @author Raphael Dichler on 25.01.2022.
  */
-public abstract class Link implements Readable, Invertible{
+public abstract class Link implements Readable, Invertible {
 
+    protected LogicGate logicGate;
     protected Connection connection;
-    private boolean invertStatus;
+    protected boolean status = false;
+    private boolean invertStatus = false;
 
     @Override
     public boolean isStatusHigh() {
-        return invertStatus ^ this.connection.isStatusHigh();
+        return invertStatus ^ status;
     }
 
     @Override

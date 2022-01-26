@@ -8,9 +8,9 @@ import java.util.List;
 /**
  * @author Raphael Dichler on 25.01.2022.
  */
-public class Connection implements Modifiable, Readable{
+public abstract class Connection implements Modifiable, Readable {
 
-    private List<Input> inputs;
+    private List<LinkObserver> inputs;
     private boolean status;
 
     public Connection() {
@@ -29,6 +29,15 @@ public class Connection implements Modifiable, Readable{
     @Override
     public void modify(boolean status) {
         this.status = status;
+        notifyLink();
+    }
+
+    public void addInputLink(LinkObserver input) {
+        this.inputs.add(input);
+    }
+
+    private void notifyLink() {
+        inputs.forEach(LinkObserver::update);
     }
 
 }

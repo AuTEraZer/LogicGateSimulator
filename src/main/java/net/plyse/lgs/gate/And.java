@@ -9,10 +9,19 @@ package net.plyse.lgs.gate;
 public class And extends LogicGate  {
 
     @Override
-    protected void operate() {
-        for (int i = 0; i < this.inputs.length; i++) {
-
+    public void update(boolean updateValue) {
+        if (!updateValue) {
+            this.status = false;
+            return;     // update status of output
         }
+
+        for (int i = 0; i < this.inputs.length; i++) {
+            if (!inputs[i].isStatusHigh()) {
+                this.status = false;
+                return; //todo update status of output
+            }
+        }
+
     }
 
 }

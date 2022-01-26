@@ -8,9 +8,8 @@ package net.plyse.lgs.gate;
  */
 public class Not extends LogicGate {
 
-
     @Override
-    protected void operate() {
+    public void update(boolean updateValue) {
 
     }
 }

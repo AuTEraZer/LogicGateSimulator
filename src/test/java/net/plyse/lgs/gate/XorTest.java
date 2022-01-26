@@ -2,9 +2,6 @@ package net.plyse.lgs.gate;
 
 import org.junit.Test;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
 /**
  * @author Raphael Dichler on 25.01.2022.
  * @project LogicGateSimulator
