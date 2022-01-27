@@ -4,6 +4,7 @@
 
 package net.plyse.lgs;
 
+import net.plyse.lgs.gate.And;
 import net.plyse.lgs.gui.LogicGateGui;
 
 /**
@@ -12,7 +13,8 @@ import net.plyse.lgs.gui.LogicGateGui;
 public class Main {
 
     public static void main(String[] args) {
-        System.out.println();
+        And a = new And(3);
+        a.connectToInput();
         LogicGateGui.runApplication(args);
     }
 
