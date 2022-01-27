@@ -27,7 +27,7 @@ public class LogicGateGui extends JFrame{
         setVisible(true);
     }
 
-    public static void runApplication(String[] args) {
+    public static void runApplication() {
         new LogicGateGui("LGS");
     }
 

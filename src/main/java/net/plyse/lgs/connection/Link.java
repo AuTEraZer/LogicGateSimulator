@@ -8,7 +8,7 @@ import net.plyse.lgs.gate.LogicGateObserver;
 /**
  * @author Raphael Dichler on 25.01.2022.
  */
-public abstract class Link implements Readable, Invertible, LinkObserver, Connectable {
+public abstract class Link implements Readable, LinkObserver, Connectable {
 
     protected final LogicGateObserver logicGate;
     protected Connection connection = null;
@@ -24,24 +24,22 @@ public abstract class Link implements Readable, Invertible, LinkObserver, Connec
         this.status = status;
     }
 
+    public void invert() {
+        invertStatus = true;
+    }
+
+    public void reverse() {
+        invertStatus = false;
+    }
+
     @Override
     public boolean isStatusHigh() {
         return invertStatus ^ status;
     }
 
     @Override
-    public void invert() {
-        invertStatus = true;
-    }
-
-    @Override
-    public void reverse() {
-        invertStatus = false;
-    }
-
-    @Override
-    /**
-     * @throws NullPointerException If <code>connection</code> is null
+    /*
+      @throws NullPointerException If <code>connection</code> is null
      */
     public void connect(Connection connection) {
         if (connection == null) throw new NullPointerException("The connection cannot be null.");

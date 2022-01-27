@@ -1,0 +1,2 @@
+(A ^ B) ^ C -> sum
+A & B | ((A ^ B) & C) -> carry

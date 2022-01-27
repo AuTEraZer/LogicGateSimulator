@@ -8,6 +8,7 @@ import net.plyse.lgs.gate.LogicGateObserver;
 /**
  * @author Raphael Dichler on 25.01.2022.
  */
+@SuppressWarnings("unused")
 public class Output extends Link {
 
     public Output(LogicGateObserver logicGate) {

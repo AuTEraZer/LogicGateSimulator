@@ -12,7 +12,7 @@ import net.plyse.lgs.gui.LogicGateGui;
 public class Main {
 
     public static void main(String[] args) {
-        LogicGateGui.runApplication(args);
+        LogicGateGui.runApplication();
     }
 
 }
