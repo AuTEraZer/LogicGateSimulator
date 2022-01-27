@@ -10,8 +10,23 @@ public class Xor extends LogicGate{
 
     private static final int MIN_INPUTS = 2;
 
+    /**
+     * @param inputs inputs of the <code>LogicGate</code>. If <code>inputs</code> is less than 2 the Inputs will be
+     *               set to 2.
+     * @param status internal status
+     * @throws IllegalArgumentException If <code>inputs</code> is less than 0
+     */
     public Xor(int inputs, boolean status) {
         super(Math.max(MIN_INPUTS, inputs), status);
+    }
+
+    /**
+     * Creates a <code>LogicGate</code> with internal status false.
+     * @param inputs inputs of the LogicGate
+     * @throws IllegalArgumentException If <code>inputs</code> is less than 0
+     */
+    public Xor(int inputs) {
+        super(inputs);
     }
 
     @Override

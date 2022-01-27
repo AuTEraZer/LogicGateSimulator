@@ -6,8 +6,8 @@ package net.plyse.lgs.connection;
 /**
  * @author Raphael Dichler on 25.01.2022.
  */
-public interface Modifiable {
+public interface InputModifiable {
 
-    void modify(boolean status);
+    void modifyAndPropagate(boolean status);
 
 }

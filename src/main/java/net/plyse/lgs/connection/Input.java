@@ -24,4 +24,10 @@ public class Input extends Link {
         logicGate.update(status);
     }
 
+    @Override
+    public void connect(Connection connection) {
+        if (connection == null) throw new NullPointerException("The connection cannot be null.");
+        this.connection = connection;
+        this.connection.addInputLink(this);
+    }
 }

@@ -46,6 +46,7 @@ public abstract class Link implements Readable, Invertible, LinkObserver, Connec
     public void connect(Connection connection) {
         if (connection == null) throw new NullPointerException("The connection cannot be null.");
         this.connection = connection;
+        this.connection.addInputLink(this);
     }
 
 }

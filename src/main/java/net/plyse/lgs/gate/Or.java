@@ -9,8 +9,23 @@ package net.plyse.lgs.gate;
 @SuppressWarnings("ALL")
 public class Or extends LogicGate{
 
+    /**
+     * @param inputs inputs of the <code>LogicGate</code>. If <code>inputs</code> is less than 2 the Inputs will be
+     *               set to 2.
+     * @param status internal status
+     * @throws IllegalArgumentException If <code>inputs</code> is less than 0
+     */
     public Or(int inputs, boolean status) {
         super(inputs, status);
+    }
+
+    /**
+     * Creates a <code>LogicGate</code> with internal status false.
+     * @param inputs inputs of the LogicGate
+     * @throws IllegalArgumentException If <code>inputs</code> is less than 0
+     */
+    public Or(int inputs) {
+        super(inputs);
     }
 
     @Override
@@ -32,4 +47,5 @@ public class Or extends LogicGate{
         this.status = false;
         output.update();
     }
+
 }

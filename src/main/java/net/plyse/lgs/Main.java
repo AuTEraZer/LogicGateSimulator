@@ -13,8 +13,6 @@ import net.plyse.lgs.gui.LogicGateGui;
 public class Main {
 
     public static void main(String[] args) {
-        And a = new And(3);
-        a.connectToInput();
         LogicGateGui.runApplication(args);
     }
 

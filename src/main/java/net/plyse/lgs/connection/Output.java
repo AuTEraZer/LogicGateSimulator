@@ -21,13 +21,14 @@ public class Output extends Link implements Modifier {
     @Override
     public void modifier() {
         if (connection != null) {
-            this.connection.modify(isStatusHigh());
+            this.connection.modifyAndPropagate(isStatusHigh());
         }
     }
 
     @Override
     public void update() {
-        modifier();
+        this.status = this.logicGate.isStatusHigh();
+        this.connection.modifyStatus(isStatusHigh());
     }
 
 }
