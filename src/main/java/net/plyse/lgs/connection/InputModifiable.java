@@ -8,6 +8,6 @@ package net.plyse.lgs.connection;
  */
 public interface InputModifiable {
 
-    void modifyAndPropagate(boolean status);
+    void modify(boolean status);
 
 }

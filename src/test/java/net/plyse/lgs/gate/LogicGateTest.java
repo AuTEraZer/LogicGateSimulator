@@ -4,9 +4,8 @@
 
 package net.plyse.lgs.gate;
 
-import net.plyse.lgs.connection.Connection;
 import net.plyse.lgs.connection.Input;
-import net.plyse.lgs.connection.Output;
+import net.plyse.lgs.connection.SingleLineConnection;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -113,7 +112,7 @@ public class LogicGateTest {
         }
 
         logicGate.inputs = createInputs(inputs, logicGate);
-        logicGate.output.connect(new Connection());
+        logicGate.output.connect(new SingleLineConnection());
         return logicGate;
     }
 
@@ -122,7 +121,7 @@ public class LogicGateTest {
 
         for (boolean b : in) {
             Input input = new Input(logicGate, b);
-            input.connect(new Connection());
+            input.connect(new SingleLineConnection());
             inputList.add(input);
         }
 

@@ -4,7 +4,6 @@
 
 package net.plyse.lgs;
 
-import net.plyse.lgs.gate.And;
 import net.plyse.lgs.gui.LogicGateGui;
 
 /**

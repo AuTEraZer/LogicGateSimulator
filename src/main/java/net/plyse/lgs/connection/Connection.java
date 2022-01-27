@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * @author Raphael Dichler on 25.01.2022.
  */
-public class Connection implements InputModifiable, Readable, OutputModifiable {
+public abstract class Connection implements InputModifiable, Readable {
 
     private final List<LinkObserver> inputs;
     private boolean status;
@@ -32,14 +32,11 @@ public class Connection implements InputModifiable, Readable, OutputModifiable {
     }
 
     @Override
-    public void modifyAndPropagate(boolean status) {
-        this.status = status;
-        notifyLink();
-    }
-
-    @Override
-    public void modifyStatus(boolean status) {
-        this.status = status;
+    public void modify(boolean status) {
+        if (!(status == this.status)){
+            this.status = status;
+            notifyLink();
+        }
     }
 
     public void addInputLink(LinkObserver input) {

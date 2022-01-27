@@ -26,17 +26,17 @@ public class ConnectionTest {
     void testConnectionChangeBehavior(LogicGate gate, Connection c1, Connection c2, Connection c3, Connection o1,
                                       boolean[] expOutput) {
 
-        c1.modifyAndPropagate(true);
+        c1.modify(true);
         Assertions.assertEquals(expOutput[0], gate.isStatusHigh());
         Assertions.assertTrue(c1.isStatusHigh());
         Assertions.assertEquals(expOutput[0], o1.isStatusHigh());
 
-        c2.modifyAndPropagate(true);
+        c2.modify(true);
         Assertions.assertEquals(expOutput[1], gate.isStatusHigh());
         Assertions.assertTrue(c2.isStatusHigh());
         Assertions.assertEquals(expOutput[1], o1.isStatusHigh());
 
-        c3.modifyAndPropagate(true);
+        c3.modify(true);
         Assertions.assertEquals(expOutput[2], gate.isStatusHigh());
         Assertions.assertTrue(c3.isStatusHigh());
         Assertions.assertEquals(expOutput[2], o1.isStatusHigh());
@@ -60,13 +60,13 @@ public class ConnectionTest {
     @Test
     void testRecursiveConnectionBehaviorTest() {
         LogicGate and = new And(2);
-        Connection inputAnd = new Connection();
-        Connection inputAndOr = new Connection();
+        Connection inputAnd = new SingleLineConnection();
+        Connection inputAndOr = new SingleLineConnection();
 
         LogicGate or = new Or(2);
-        Connection inputOrOutputAnd = new Connection();
+        Connection inputOrOutputAnd = new SingleLineConnection();
 
-        Connection output = new Connection();
+        Connection output = new SingleLineConnection();
 
         and.connectToInput(inputAnd, inputAndOr);
         and.connectToOutput(inputOrOutputAnd);
@@ -77,18 +77,74 @@ public class ConnectionTest {
         Assertions.assertFalse(inputOrOutputAnd.isStatusHigh());
         Assertions.assertFalse(output.isStatusHigh());
 
-        inputAndOr.modifyAndPropagate(true);
+        inputAndOr.modify(true);
         Assertions.assertFalse(inputOrOutputAnd.isStatusHigh());
         Assertions.assertTrue(output.isStatusHigh());
 
-        inputAndOr.modifyAndPropagate(false);
-        inputAnd.modifyAndPropagate(true);
+        inputAndOr.modify(false);
+        inputAnd.modify(true);
         Assertions.assertFalse(inputOrOutputAnd.isStatusHigh());
         Assertions.assertFalse(output.isStatusHigh());
 
-        inputAndOr.modifyAndPropagate(true);
+        inputAndOr.modify(true);
         Assertions.assertTrue(inputOrOutputAnd.isStatusHigh());
         Assertions.assertTrue(output.isStatusHigh());
+
+    }
+
+
+    @Test
+    void testFullAdderTest() {
+
+        SingleLineConnection a = new SingleLineConnection();
+        SingleLineConnection b = new SingleLineConnection();
+        SingleLineConnection c = new SingleLineConnection();
+        SingleLineConnection sum = new SingleLineConnection();
+        SingleLineConnection carry = new SingleLineConnection();
+
+        LogicGate xorOuter = new Xor(2);
+        xorOuter.connectToInput(a, b);
+        SingleLineConnection xorOuterOutputXorInnerInput = new SingleLineConnection();
+        xorOuter.connectToOutput(xorOuterOutputXorInnerInput);
+
+        LogicGate xorInner = new Xor(2);
+        xorInner.connectToInput(xorOuterOutputXorInnerInput, c);
+        xorInner.connectToOutput(sum);
+
+        SingleLineConnection andUpperOut = new SingleLineConnection();
+        LogicGate andUpper = new And(2);
+        andUpper.connectToInput(c, xorOuterOutputXorInnerInput);
+        andUpper.connectToOutput(andUpperOut);
+
+
+        SingleLineConnection andLowerOut = new SingleLineConnection();
+        LogicGate andLower = new And(2);
+        andLower.connectToInput(a, b);
+        andLower.connectToOutput(andLowerOut);
+
+        LogicGate or = new Or(2);
+        or.connectToInput(andLowerOut, andUpperOut);
+        or.connectToOutput(carry);
+
+
+        Assertions.assertFalse(sum.isStatusHigh());
+        Assertions.assertFalse(carry.isStatusHigh());
+
+        c.modify(true);
+        Assertions.assertTrue(sum.isStatusHigh());
+        Assertions.assertFalse(carry.isStatusHigh());
+
+        a.modify(true);
+        b.modify(true);
+        Assertions.assertTrue(sum.isStatusHigh());
+        Assertions.assertTrue(carry.isStatusHigh());
+        Assertions.assertFalse(xorOuterOutputXorInnerInput.isStatusHigh());
+        Assertions.assertFalse(andUpperOut.isStatusHigh());
+        Assertions.assertTrue(andLowerOut.isStatusHigh());
+
+        c.modify(false);
+        Assertions.assertFalse(sum.isStatusHigh());
+        Assertions.assertTrue(carry.isStatusHigh());
 
     }
 
@@ -101,10 +157,10 @@ public class ConnectionTest {
         private final Connection o1;
 
         public GateWrapper(Gate gate) {
-            i1 = new Connection();
-            i2 = new Connection();
-            i3 = new Connection();
-            o1 = new Connection();
+            i1 = new SingleLineConnection();
+            i2 = new SingleLineConnection();
+            i3 = new SingleLineConnection();
+            o1 = new SingleLineConnection();
             switch (gate) {
                 case AND -> this.gate = new And(3);
                 case OR -> this.gate = new Or(3);
@@ -118,7 +174,7 @@ public class ConnectionTest {
     }
 
     private enum Gate{
-        AND, OR, XOR;
+        AND, OR, XOR
     }
 
 }

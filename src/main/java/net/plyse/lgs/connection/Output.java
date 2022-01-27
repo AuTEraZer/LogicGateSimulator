@@ -8,7 +8,7 @@ import net.plyse.lgs.gate.LogicGateObserver;
 /**
  * @author Raphael Dichler on 25.01.2022.
  */
-public class Output extends Link implements Modifier {
+public class Output extends Link {
 
     public Output(LogicGateObserver logicGate) {
         super(logicGate);
@@ -18,17 +18,11 @@ public class Output extends Link implements Modifier {
         super(logicGate, status);
     }
 
-    @Override
-    public void modifier() {
-        if (connection != null) {
-            this.connection.modifyAndPropagate(isStatusHigh());
-        }
-    }
 
     @Override
     public void update() {
         this.status = this.logicGate.isStatusHigh();
-        this.connection.modifyStatus(isStatusHigh());
+        this.connection.modify(isStatusHigh());
     }
 
 }
