@@ -13,6 +13,10 @@ public class And extends LogicGate  {
         super(inputs, status);
     }
 
+    public And(int inputs) {
+        super(inputs);
+    }
+
     @Override
     public void update(boolean updateValue) {
         if (!updateValue) {

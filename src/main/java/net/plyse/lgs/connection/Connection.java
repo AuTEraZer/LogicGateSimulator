@@ -14,6 +14,9 @@ public class Connection implements Modifiable, Readable {
     private final List<LinkObserver> inputs;
     private boolean status;
 
+    /**
+     *  Create a Connection with status low.
+     */
     public Connection() {
         this(false);
     }

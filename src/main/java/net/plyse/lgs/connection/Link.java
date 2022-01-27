@@ -40,8 +40,11 @@ public abstract class Link implements Readable, Invertible, LinkObserver, Connec
     }
 
     @Override
+    /**
+     * @throws NullPointerException If <code>connection</code> is null
+     */
     public void connect(Connection connection) {
-        if (connection == null) throw new IllegalArgumentException("The connection cannot be null.");
+        if (connection == null) throw new NullPointerException("The connection cannot be null.");
         this.connection = connection;
     }
 
