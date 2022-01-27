@@ -11,7 +11,6 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -23,80 +22,82 @@ public class LogicGateTest {
 
     @ParameterizedTest
     @MethodSource("andProvider")
-    void testAndUpdate(boolean expectedOutput, LogicGate gate) {
-        gate.update(true);
+    void testAndUpdate(boolean expectedOutput, LogicGate gate, boolean updateValue) {
+        gate.update(updateValue);
         assertEquals(expectedOutput, gate.status);
     }
 
     static Stream<Arguments> andProvider()  {
         return Stream.of(
-               Arguments.of(true, inputToLogicGate(LogicGates.AND, 0b111111)),
-               Arguments.of(true, inputToLogicGate(LogicGates.AND, 0b1)),
-               Arguments.of(false, inputToLogicGate(LogicGates.AND, 0b101111)),
-               Arguments.of(false, inputToLogicGate(LogicGates.AND, 0b101010)),
-               Arguments.of(false, inputToLogicGate(LogicGates.AND, 0b001010)),
-               Arguments.of(false, inputToLogicGate(LogicGates.AND, 0b0000)),
-               Arguments.of(false, inputToLogicGate(LogicGates.AND, 0b0))
+               Arguments.of(true, inputToLogicGate(LogicGates.AND, 0b1_111111), true),
+               Arguments.of(true, inputToLogicGate(LogicGates.AND, 0b1_1), true),
+               Arguments.of(false, inputToLogicGate(LogicGates.AND, 0b1_101111), false),
+               Arguments.of(false, inputToLogicGate(LogicGates.AND, 0b1_101010), true),
+               Arguments.of(false, inputToLogicGate(LogicGates.AND, 0b1_001010), true),
+               Arguments.of(false, inputToLogicGate(LogicGates.AND, 0b1_0000), false),
+               Arguments.of(false, inputToLogicGate(LogicGates.AND, 0b1_01), true)
         );
     }
 
     @ParameterizedTest
     @MethodSource("orProvider")
-    void testOrUpdate(boolean expectedOutput, LogicGate gate) {
-        gate.update(false);
+    void testOrUpdate(boolean expectedOutput, LogicGate gate, boolean updateValue) {
+        gate.update(updateValue);
         assertEquals(expectedOutput, gate.status);
     }
 
     static Stream<Arguments> orProvider()  {
         return Stream.of(
-                Arguments.of(true, inputToLogicGate(LogicGates.OR, 0b111111)),
-                Arguments.of(true, inputToLogicGate(LogicGates.OR, 0b1)),
-                Arguments.of(true, inputToLogicGate(LogicGates.OR, 0b101111)),
-                Arguments.of(true, inputToLogicGate(LogicGates.OR, 0b101010)),
-                Arguments.of(true, inputToLogicGate(LogicGates.OR, 0b001010)),
-                Arguments.of(false, inputToLogicGate(LogicGates.OR, 0b0000)),
-                Arguments.of(false, inputToLogicGate(LogicGates.OR, 0b0)),
-                Arguments.of(true, inputToLogicGate(LogicGates.OR, 0b1))
+                Arguments.of(true, inputToLogicGate(LogicGates.OR, 0b1_111111), true),
+                Arguments.of(true, inputToLogicGate(LogicGates.OR, 0b1_1), true),
+                Arguments.of(true, inputToLogicGate(LogicGates.OR, 0b1_101111), false),
+                Arguments.of(true, inputToLogicGate(LogicGates.OR, 0b1_101010), false),
+                Arguments.of(true, inputToLogicGate(LogicGates.OR, 0b1_001010), true),
+                Arguments.of(false, inputToLogicGate(LogicGates.OR, 0b1_0000), false),
+                Arguments.of(false, inputToLogicGate(LogicGates.OR, 0b1_0), false),
+                Arguments.of(true, inputToLogicGate(LogicGates.OR, 0b1_1), true)
         );
     }
 
     @ParameterizedTest
     @MethodSource("notProvider")
-    void testNotUpdate(boolean expectedOutput, LogicGate gate) {
-        gate.update(false);
+    void testNotUpdate(boolean expectedOutput, LogicGate gate, boolean updateValue) {
+        gate.update(updateValue);
         assertEquals(expectedOutput, gate.status);
     }
 
     static Stream<Arguments> notProvider()  {
         return Stream.of(
-                Arguments.of(false, inputToLogicGate(LogicGates.NOT, 0b1)),
-                Arguments.of(true, inputToLogicGate(LogicGates.NOT, 0b0))
+                Arguments.of(false, inputToLogicGate(LogicGates.NOT, 0b1_1), true),
+                Arguments.of(true, inputToLogicGate(LogicGates.NOT, 0b1_0), false)
         );
     }
 
     @ParameterizedTest
     @MethodSource("xorProvider")
-    void testXorUpdate(boolean expectedOutput, LogicGate gate) {
-        gate.update(false);
+    void testXorUpdate(boolean expectedOutput, LogicGate gate, boolean updateValue) {
+        gate.update(updateValue);
         assertEquals(expectedOutput, gate.status);
     }
 
     static Stream<Arguments> xorProvider()  {
         return Stream.of(
-                Arguments.of(true, inputToLogicGate(LogicGates.XOR, 0b10)),
-                Arguments.of(false, inputToLogicGate(LogicGates.XOR, 0b00)),
-                Arguments.of(false, inputToLogicGate(LogicGates.XOR, 0b011110)),
-                Arguments.of(true, inputToLogicGate(LogicGates.XOR, 0b0111101)),
-                Arguments.of(false, inputToLogicGate(LogicGates.XOR, 0b0000001)),
-                Arguments.of(false, inputToLogicGate(LogicGates.XOR, 0b000000110)),
-                Arguments.of(true, inputToLogicGate(LogicGates.XOR, 0b110))
+                Arguments.of(true, inputToLogicGate(LogicGates.XOR, 0b1_10), false),
+                Arguments.of(false, inputToLogicGate(LogicGates.XOR, 0b1_00), false),
+                Arguments.of(false, inputToLogicGate(LogicGates.XOR, 0b1_011110), false),
+                Arguments.of(true, inputToLogicGate(LogicGates.XOR, 0b1_0111101), false),
+                Arguments.of(false, inputToLogicGate(LogicGates.XOR, 0b1_0100001), true),
+                Arguments.of(false, inputToLogicGate(LogicGates.XOR, 0b1_000000110), false),
+                Arguments.of(true, inputToLogicGate(LogicGates.XOR, 0b1_1101), true)
         );
     }
 
     private static LogicGate inputToLogicGate(LogicGates gate, int binary) {
         String s = Integer.toBinaryString(binary);
-        boolean[] arr = new boolean[s.length()];
-        IntStream.range(0, s.length()).forEach(i -> arr[i] = s.charAt(i) == '1');
+        boolean[] arr = new boolean[s.length() - 1];
+        for (int i = 1; i < s.toCharArray().length; i++) {
+            arr[i-1] = s.charAt(i) == '1';
+        }
         return inputToLogicGate(gate, arr);
     }
 

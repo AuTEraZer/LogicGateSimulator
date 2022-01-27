@@ -29,6 +29,8 @@ public class And extends LogicGate  {
             }
         }
 
+        this.status = true;
+        output.update();
     }
 
 }

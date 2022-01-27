@@ -22,12 +22,14 @@ public class Or extends LogicGate{
         }
 
         for (int i = 0; i < inputs.length; i++) {
-            if (!inputs[i].isStatusHigh()) {
-                this.status = false;
+            if (inputs[i].isStatusHigh()) {
+                this.status = true;
                 output.update();
                 return;
             }
         }
 
+        this.status = false;
+        output.update();
     }
 }
