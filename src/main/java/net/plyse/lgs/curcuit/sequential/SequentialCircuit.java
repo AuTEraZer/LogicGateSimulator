@@ -8,6 +8,9 @@ import net.plyse.lgs.connection.Input;
 import net.plyse.lgs.connection.Output;
 import net.plyse.lgs.gate.LogicGateObserver;
 
+import java.util.List;
+import java.util.Set;
+
 
 /**
  * @author Raphael Dichler on 27.01.2022.
@@ -16,8 +19,6 @@ public class SequentialCircuit implements LogicGateObserver {
 
     private Input[] inputs;
     private Output[] outputs;
-
-
 
     @Override
     public boolean isStatusHigh() {
@@ -32,7 +33,10 @@ public class SequentialCircuit implements LogicGateObserver {
     public static void main(String[] args) {
         String instruction = "(A ^ B) ^ C -> sum\n" +
                 "(A & B) | ((A ^ B) & C) -> carry";
+        List<Integer> integers = List.of(1, 2);
+        Set.of(2);
     }
+
 
     public SequentialCircuit createSequentialCircuit(String path) {
 
