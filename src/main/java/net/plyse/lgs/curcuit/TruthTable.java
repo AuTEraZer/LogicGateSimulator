@@ -27,9 +27,8 @@ public class TruthTable {
             boolean value = false;
             for (int j = 1; j <= length; j++) {
                 this.truthTable[j - 1][i] = value;
-                if (j  % alternating == 0) {
+                if (j  % alternating == 0)
                     value = !value;
-                }
             }
             alternating <<= 1;
         }

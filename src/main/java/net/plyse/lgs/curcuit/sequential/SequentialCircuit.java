@@ -55,7 +55,7 @@ public class SequentialCircuit implements LogicGateObserver {
     public static TruthTable getTruthTable(Connection[] inputs, Output[] outputs) {
         TruthTable truthTable = new TruthTable(inputs.length, outputs.length);
 
-        for (int i = inputs.length - 1; i >= 0; i++) {
+        for (int i = 0; i < inputs.length; i++) {
             boolean[] row = truthTable.getInputsOf(i);
             for (int j = 0; j < inputs.length; j++) {
                 inputs[j].modify(row[j]);
