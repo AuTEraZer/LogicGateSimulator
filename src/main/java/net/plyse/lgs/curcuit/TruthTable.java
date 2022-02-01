@@ -14,6 +14,8 @@ public class TruthTable {
     private boolean[][] truthTable;
 
     public TruthTable(int inputs, int outputs) {
+        if (inputs <= 0 || outputs <= 0)
+            throw new IllegalArgumentException("Cannot create a truth table with " + inputs + " inputs and " + outputs + " outputs.");
         int length = 1 << inputs;
         this.truthTable = new boolean[length][inputs + outputs];
         setup(inputs, length);
