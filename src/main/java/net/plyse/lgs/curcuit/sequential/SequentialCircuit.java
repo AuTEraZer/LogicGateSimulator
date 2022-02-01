@@ -4,8 +4,10 @@
 
 package net.plyse.lgs.curcuit.sequential;
 
+import net.plyse.lgs.connection.Connection;
 import net.plyse.lgs.connection.Input;
 import net.plyse.lgs.connection.Output;
+import net.plyse.lgs.curcuit.TruthTable;
 import net.plyse.lgs.gate.LogicGateObserver;
 
 import java.util.List;
@@ -45,5 +47,21 @@ public class SequentialCircuit implements LogicGateObserver {
         return null;
     }
 
+    public static TruthTable getTruthTable(Connection[] inputs, Output... outputs) {
+        TruthTable truthTable = new TruthTable(inputs.length, outputs.length);
+
+//        inputs[0].modify();
+
+        return truthTable;
+    }
+
+
+
+    private static class Tree {
+
+
+
+
+    }
 
 }
