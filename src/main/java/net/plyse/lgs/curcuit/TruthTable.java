@@ -35,12 +35,12 @@ public class TruthTable {
         }
     }
 
+    public boolean[] getInputsOf(int row) {
+        return this.truthTable[row];
+    }
 
-    public static void main(String[] args) {
-
-
-
-        System.out.println(Arrays.deepToString(new TruthTable(3, 1).truthTable));
+    public boolean[][] getTruthTable() {
+        return truthTable;
     }
 
 }

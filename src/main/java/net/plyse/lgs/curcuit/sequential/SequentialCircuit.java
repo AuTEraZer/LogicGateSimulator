@@ -20,6 +20,7 @@ import java.util.Set;
 public class SequentialCircuit implements LogicGateObserver {
 
     private Input[] inputs;
+    private Connection[] inputConnections;
     private Output[] outputs;
 
     @Override
@@ -47,21 +48,26 @@ public class SequentialCircuit implements LogicGateObserver {
         return null;
     }
 
-    public static TruthTable getTruthTable(Connection[] inputs, Output... outputs) {
+    public TruthTable getTruthTable() {
+        return getTruthTable(this.inputConnections, this.outputs);
+    }
+
+    public static TruthTable getTruthTable(Connection[] inputs, Output[] outputs) {
         TruthTable truthTable = new TruthTable(inputs.length, outputs.length);
 
-//        inputs[0].modify();
+        for (int i = inputs.length - 1; i >= 0; i++) {
+            boolean[] row = truthTable.getInputsOf(i);
+            for (int j = 0; j < inputs.length; j++) {
+                inputs[j].modify(row[j]);
+            }
+            for (int k = 0; k < outputs.length; k++) {
+                row[k + inputs.length] = outputs[k].isStatusHigh();
+            }
+        }
 
         return truthTable;
     }
 
 
-
-    private static class Tree {
-
-
-
-
-    }
 
 }
