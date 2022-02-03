@@ -14,5 +14,4 @@ import java.util.List;
 public class Function {
 
     private List<Link> inputs;
-    private List<Link> outputs;
 }
