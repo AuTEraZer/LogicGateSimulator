@@ -152,12 +152,11 @@ class TruthTableTest {
                 .getTruthTable(new Connection[]{a, b, c}, new Output[]{sumOutput, carryOutput});
 
         boolean[][] truthTable1 = truthTable.getTruthTable();
-        boolean[] booleans = truthTable1[3];
 
         assertArrayEquals(new boolean[5], truthTable1[0]);                                 // 000 00
         assertArrayEquals(new boolean[]{false, false, true, true, false}, truthTable1[1]); // 001 10
         assertArrayEquals(new boolean[]{false, true, false, true, false}, truthTable1[2]); // 010 10
-        assertArrayEquals(new boolean[]{false, true, true, false, true}, booleans);  // 011 01
+        assertArrayEquals(new boolean[]{false, true, true, false, true}, truthTable1[3]);  // 011 01 todo error
         assertArrayEquals(new boolean[]{true, false, false, true, false}, truthTable1[4]); // 100 10
         assertArrayEquals(new boolean[]{true, false, true, false, true}, truthTable1[5]);  // 101 01
         assertArrayEquals(new boolean[]{true, true, false, false, true}, truthTable1[6]);  // 110 01

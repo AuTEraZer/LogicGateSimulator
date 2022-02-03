@@ -95,7 +95,6 @@ public class ConnectionTest {
 
     @Test
     void testFullAdderTest() {
-
         SingleLineConnection a = new SingleLineConnection();
         SingleLineConnection b = new SingleLineConnection();
         SingleLineConnection c = new SingleLineConnection();
@@ -145,6 +144,17 @@ public class ConnectionTest {
         c.modify(false);
         Assertions.assertFalse(sum.isStatusHigh());
         Assertions.assertTrue(carry.isStatusHigh());
+
+
+        //011 01
+        a.modify(false);
+        b.modify(true);
+        c.modify(true);
+
+        Assertions.assertFalse(sum.isStatusHigh());
+        Assertions.assertTrue(carry.isStatusHigh());
+
+
 
     }
 

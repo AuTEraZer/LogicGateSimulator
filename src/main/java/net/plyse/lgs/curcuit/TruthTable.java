@@ -4,8 +4,6 @@
 
 package net.plyse.lgs.curcuit;
 
-import java.util.Arrays;
-
 /**
  * @author Raphael Dichler on 01.02.2022.
  */
